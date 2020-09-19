@@ -6,7 +6,7 @@ var _require = require("lodash"),
 console.log('App.js is running!');
 
 //JSX - Javascript XML
-//be sure to wrap expression in div if want adjacent elements
+//be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 var template = React.createElement(
   'div',
   null,
