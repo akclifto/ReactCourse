@@ -1,7 +1,7 @@
 
 
 //challenge
-var appObj = {
+const appObj = {
     title: 'Indecision App',
     subtitle: 'new paragraph title',
     options: ['one', 'two']
@@ -13,7 +13,7 @@ function getOptions(options) {
         return (
         <ol>
             {options.map(opt => (
-                <li>
+                <li key = {opt}>
                     {' ' + opt}
                 </li>
             ))}
@@ -23,9 +23,9 @@ function getOptions(options) {
 }
 
 
-//JSX - Javascript XML
+//JSX - Ja74script XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
-var template = (
+const template = (
     <div> 
         <h1>{appObj.title.toUpperCase()}</h1> 
 
@@ -37,7 +37,7 @@ var template = (
 
 );
 
-var user = {
+const user = {
     name: 'akclifto',
     age: 34,
     loc: 'Arizona'
@@ -52,7 +52,7 @@ function getLocation(loc){
 
 //first challenge
 //use of ternary, logical AND and function call
-var templateTwo = (
+const templateTwo = (
 
     <div>
         <h1>{user.name ? user.name : 'Anon'}</h1>
@@ -62,6 +62,6 @@ var templateTwo = (
 );
 
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);

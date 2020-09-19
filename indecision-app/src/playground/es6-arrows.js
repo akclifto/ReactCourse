@@ -1,7 +1,6 @@
-'use strict';
 
 //es5 function
-var square = function square(x) {
+const square = function(x) {
 
     return x * x;
 };
@@ -13,24 +12,22 @@ console.log(square(8));
 //     return x * x;
 // }
 //more concise version of the above, good for returning a single expression.
-var squarrow = function squarrow(x) {
-    return x * x;
-};
+const squarrow = (x) => x * x;
 
 console.log(squarrow(10));
 
-var fullName = 'Adam Clifton';
+const fullName = 'Adam Clifton';
 
 //challenge
 
 //verbose last
-var getLast = function getLast(x) {
+const getLast = (x) => {
     return x.split(' ')[1];
-};
-console.log(getLast('adam clifton'));
+}
+console.log(getLast('adam clifton'))
 
 //concise first
-var firstName = function firstName(x) {
-    return x.split(' ')[0];
-};
+const firstName = (x) => x.split(' ')[0];
 console.log(firstName('adam clifton'));
+
+
