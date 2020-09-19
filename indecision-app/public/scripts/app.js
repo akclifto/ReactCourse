@@ -32,7 +32,7 @@ var template = React.createElement(
     React.createElement(
         'h1',
         null,
-        appObj.title.toUpperCase()
+        appObj.title
     ),
     appObj.subtitle && appObj.subtitle != '' && React.createElement(
         'p',
@@ -48,44 +48,5 @@ var template = React.createElement(
     getOptions(appObj.options)
 );
 
-var user = {
-    name: 'akclifto',
-    age: 34,
-    loc: 'Arizona'
-};
-
-function getLocation(loc) {
-
-    if (loc) {
-        return React.createElement(
-            'p',
-            null,
-            'Location: ',
-            loc
-        );
-    }
-}
-
-//first challenge
-//use of ternary, logical AND and function call
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.name ? user.name : 'Anon'
-    ),
-    user.age && user.age >= 18 && React.createElement(
-        'p',
-        null,
-        ' Age: ',
-        user.age,
-        ' '
-    ),
-    getLocation(user.loc)
-);
-
 var appRoot = document.getElementById('app');
-
 ReactDOM.render(template, appRoot);
