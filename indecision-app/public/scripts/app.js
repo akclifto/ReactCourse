@@ -1,5 +1,11 @@
 'use strict';
 
+//challenge
+var appObj = {
+    title: 'Indecision App',
+    subtitle: 'new paragraph title'
+};
+
 //JSX - Javascript XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 var template = React.createElement(
@@ -8,12 +14,13 @@ var template = React.createElement(
     React.createElement(
         'h1',
         null,
-        'Indecision App'
+        appObj.title.toUpperCase()
     ),
     React.createElement(
         'p',
         null,
-        'Here is some paragraph text.'
+        ' ',
+        appObj.subtitle + '!'
     ),
     React.createElement(
         'ol',
@@ -36,6 +43,12 @@ var template = React.createElement(
     )
 );
 
+var user = {
+    name: 'akclifto',
+    age: 34,
+    loc: 'AZ'
+};
+
 var myName = 'Adam';
 var age = 34;
 var loc = 'Arizona';
@@ -47,24 +60,24 @@ var templateTwo = React.createElement(
     React.createElement(
         'h1',
         null,
-        myName.toUpperCase() + '!'
+        user.name + '!'
     ),
     React.createElement(
         'p',
         null,
         ' Age: ',
-        age,
+        user.age,
         ' '
     ),
     React.createElement(
         'p',
         null,
         ' Location: ',
-        loc,
+        user.loc,
         ' '
     )
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);

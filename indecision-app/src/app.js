@@ -1,10 +1,18 @@
 
+
+//challenge
+var appObj = {
+    title: 'Indecision App',
+    subtitle: 'new paragraph title'
+};
+
+
 //JSX - Javascript XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 var template = (
     <div> 
-        <h1>Indecision App</h1> 
-        <p>Here is some paragraph text.</p>  
+        <h1>{appObj.title.toUpperCase()}</h1> 
+        <p> {appObj.subtitle + '!'}</p>  
         <ol>
             <li>Item one</li>
             <li>Item two</li>
@@ -14,6 +22,12 @@ var template = (
 
 );
 
+var user = {
+    name: 'akclifto',
+    age: 34,
+    loc: 'AZ'
+};
+
 var myName = 'Adam';
 var age = 34;
 var loc = 'Arizona';
@@ -22,13 +36,13 @@ var loc = 'Arizona';
 var templateTwo = (
 
     <div>
-        <h1>{myName.toUpperCase() + '!'}</h1>
-        <p> Age: {age} </p>
-        <p> Location: {loc} </p>
+        <h1>{user.name + '!'}</h1>
+        <p> Age: {user.age} </p>
+        <p> Location: {user.loc} </p>
     </div>
 );
 
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
