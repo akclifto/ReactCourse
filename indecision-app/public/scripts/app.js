@@ -1,15 +1,11 @@
 'use strict';
 
-var _require = require("lodash"),
-    divide = _require.divide;
-
-console.log('App.js is running!');
-
 //JSX - Javascript XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 var template = React.createElement(
   'div',
   null,
+  ' ',
   React.createElement(
     'h1',
     null,
@@ -19,9 +15,9 @@ var template = React.createElement(
   React.createElement(
     'p',
     null,
-    'This is some info'
+    'Here is some paragraph text.'
   ),
-  ' '
+  '  '
 );
 var appRoot = document.getElementById('app');
 
