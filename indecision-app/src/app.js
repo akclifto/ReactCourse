@@ -7,6 +7,7 @@ const app = {
     options: []
 };
 
+//list out the option in the array, list form.
 function getOptions(options) {
 
     if (options) {
@@ -14,7 +15,7 @@ function getOptions(options) {
             <ol>
                 {options.map(opt => (
                     <li key={opt}>
-                        {' ' + opt}
+                        {opt}
                     </li>
                 ))}
             </ol>
@@ -56,7 +57,6 @@ const RenderApp = () => {
             
             <button onClick={clearList}>Remove All Items</button>
             <p>{app.options.length}</p>
-
 
             {getOptions(app.options)}
     

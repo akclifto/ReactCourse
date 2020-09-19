@@ -7,6 +7,7 @@ var app = {
     options: []
 };
 
+//list out the option in the array, list form.
 function getOptions(options) {
 
     if (options) {
@@ -17,7 +18,7 @@ function getOptions(options) {
                 return React.createElement(
                     'li',
                     { key: opt },
-                    ' ' + opt
+                    opt
                 );
             })
         );
