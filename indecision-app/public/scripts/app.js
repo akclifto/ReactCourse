@@ -3,8 +3,26 @@
 //challenge
 var appObj = {
     title: 'Indecision App',
-    subtitle: 'new paragraph title'
+    subtitle: 'new paragraph title',
+    options: ['one', 'two']
 };
+
+function getOptions(options) {
+
+    if (options) {
+        return React.createElement(
+            'ol',
+            null,
+            options.map(function (opt) {
+                return React.createElement(
+                    'li',
+                    null,
+                    ' ' + opt
+                );
+            })
+        );
+    }
+}
 
 //JSX - Javascript XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
@@ -16,66 +34,56 @@ var template = React.createElement(
         null,
         appObj.title.toUpperCase()
     ),
-    React.createElement(
+    appObj.subtitle && appObj.subtitle != '' && React.createElement(
         'p',
         null,
         ' ',
         appObj.subtitle + '!'
     ),
     React.createElement(
-        'ol',
+        'p',
         null,
-        React.createElement(
-            'li',
-            null,
-            'Item one'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item two'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item three'
-        )
-    )
+        appObj.options && appObj.options.length > 0 ? 'Here are your options:' : 'No options available'
+    ),
+    getOptions(appObj.options)
 );
 
 var user = {
     name: 'akclifto',
     age: 34,
-    loc: 'AZ'
+    loc: 'Arizona'
 };
 
-var myName = 'Adam';
-var age = 34;
-var loc = 'Arizona';
+function getLocation(loc) {
+
+    if (loc) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            loc
+        );
+    }
+}
 
 //first challenge
+//use of ternary, logical AND and function call
 var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        user.name + '!'
+        user.name ? user.name : 'Anon'
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
         ' Age: ',
         user.age,
         ' '
     ),
-    React.createElement(
-        'p',
-        null,
-        ' Location: ',
-        user.loc,
-        ' '
-    )
+    getLocation(user.loc)
 );
 
 var appRoot = document.getElementById('app');

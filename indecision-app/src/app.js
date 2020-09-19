@@ -3,8 +3,24 @@
 //challenge
 var appObj = {
     title: 'Indecision App',
-    subtitle: 'new paragraph title'
+    subtitle: 'new paragraph title',
+    options: ['one', 'two']
 };
+
+function getOptions(options) {
+
+    if(options) {
+        return (
+        <ol>
+            {options.map(opt => (
+                <li>
+                    {' ' + opt}
+                </li>
+            ))}
+        </ol>
+    );
+    }
+}
 
 
 //JSX - Javascript XML
@@ -12,12 +28,11 @@ var appObj = {
 var template = (
     <div> 
         <h1>{appObj.title.toUpperCase()}</h1> 
-        <p> {appObj.subtitle + '!'}</p>  
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-            <li>Item three</li>
-        </ol>
+
+        {(appObj.subtitle && appObj.subtitle != '') && <p> {appObj.subtitle + '!'}</p> }
+        <p>{appObj.options && appObj.options.length > 0 ? 'Here are your options:' : 'No options available'}</p>
+        {getOptions(appObj.options)}
+
     </div>
 
 );
@@ -25,20 +40,24 @@ var template = (
 var user = {
     name: 'akclifto',
     age: 34,
-    loc: 'AZ'
+    loc: 'Arizona'
 };
 
-var myName = 'Adam';
-var age = 34;
-var loc = 'Arizona';
+function getLocation(loc){
+
+    if(loc){
+        return <p>Location: {loc}</p>;
+    }
+}
 
 //first challenge
+//use of ternary, logical AND and function call
 var templateTwo = (
 
     <div>
-        <h1>{user.name + '!'}</h1>
-        <p> Age: {user.age} </p>
-        <p> Location: {user.loc} </p>
+        <h1>{user.name ? user.name : 'Anon'}</h1>
+        {(user.age && user.age >= 18) && <p> Age: {user.age} </p>}
+        {getLocation(user.loc)}
     </div>
 );
 
