@@ -24,10 +24,10 @@ const fullName = 'Adam Clifton';
 const getLast = (x) => {
     return x.split(' ')[1];
 }
-console.log(getLast('adam clifton'))
+console.log(getLast(fullName))
 
 //concise first
 const firstName = (x) => x.split(' ')[0];
-console.log(firstName('adam clifton'));
+console.log(firstName(fullName));
 
 
