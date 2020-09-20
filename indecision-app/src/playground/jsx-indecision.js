@@ -33,7 +33,7 @@ const onFormSubmit = (e) => {
 //clear the list and start over
 const clearList = () => {
 
-    app.options = [];
+    app.options = [];748
     RenderApp();
 };
 
