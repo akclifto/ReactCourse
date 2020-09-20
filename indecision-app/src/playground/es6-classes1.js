@@ -60,8 +60,7 @@ class Traveller extends Person {
             greet += `I am visiting from ${this.homeLoc}!`
         } 
         return greet;
-
-
+        
     }
 }
 
