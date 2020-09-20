@@ -11,17 +11,15 @@ var app = {
 function getOptions(options) {
 
     if (options) {
-        return React.createElement(
-            'ol',
-            null,
-            options.map(function (opt) {
-                return React.createElement(
-                    'li',
-                    { key: opt },
-                    opt
-                );
-            })
-        );
+        return options.map(function (opt) {
+            return React.createElement(
+                'li',
+                { key: opt },
+                ' ',
+                opt,
+                ' '
+            );
+        });
     }
 }
 
@@ -74,11 +72,10 @@ var RenderApp = function RenderApp() {
             'Remove All Items'
         ),
         React.createElement(
-            'p',
+            'ol',
             null,
-            app.options.length
+            getOptions(app.options)
         ),
-        getOptions(app.options),
         React.createElement(
             'form',
             { onSubmit: onFormSubmit },

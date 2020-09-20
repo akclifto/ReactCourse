@@ -11,14 +11,8 @@ const app = {
 function getOptions(options) {
 
     if (options) {
-        return (
-            <ol>
-                {options.map(opt => (
-                    <li key={opt}>
-                        {opt}
-                    </li>
-                ))}
-            </ol>
+        return options.map(opt => ( 
+            <li key={opt}> {opt} </li>)
         );
     }
 }
@@ -41,7 +35,6 @@ const clearList = () => {
 
     app.options = [];
     RenderApp();
-
 };
 
 //JSX - Ja74script XML
@@ -54,11 +47,10 @@ const RenderApp = () => {
     
             {(app.subtitle && app.subtitle != '') && <p> {app.subtitle + '!'}</p>}
             <p>{app.options && app.options.length > 0 ? 'Here are your options:' : 'No options available'}</p>
-            
             <button onClick={clearList}>Remove All Items</button>
-            <p>{app.options.length}</p>
-
-            {getOptions(app.options)}
+            <ol>
+                {getOptions(app.options)}
+            </ol>
     
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option" />
