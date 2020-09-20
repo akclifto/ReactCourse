@@ -54,12 +54,14 @@ class Options extends React.Component {
     render() {
         // console.log(this.props.options);
         return (
-            <div>
-                {this.props.options.length}
-                {
-                    this.props.options.map((opt) => 
-                    <p key={opt}>{opt}</p>)
-                }
+            <div>                
+
+            {
+                this.props.options.map((opt) => 
+                    <Option key={opt} optText={opt} /> 
+                )
+            }
+                
             </div>
         );
     }
@@ -70,7 +72,7 @@ class Option extends React.Component {
         return (
 
             <div>
-                Nested Option component.
+                Option: {this.props.optText}
             </div>
 
         );

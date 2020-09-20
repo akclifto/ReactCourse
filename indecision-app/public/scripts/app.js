@@ -124,13 +124,8 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
-                this.props.options.length,
                 this.props.options.map(function (opt) {
-                    return React.createElement(
-                        'p',
-                        { key: opt },
-                        opt
-                    );
+                    return React.createElement(Option, { key: opt, optText: opt });
                 })
             );
         }
@@ -154,7 +149,8 @@ var Option = function (_React$Component5) {
             return React.createElement(
                 'div',
                 null,
-                'Nested Option component.'
+                'Option: ',
+                this.props.optText
             );
         }
     }]);
