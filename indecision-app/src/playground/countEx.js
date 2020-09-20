@@ -6,17 +6,63 @@ class Counter extends React.Component {
         this.handleAdd = this.handleAdd.bind(this);
         this.handleMinus = this.handleMinus.bind(this);
         this.handleReset = this.handleReset.bind(this);
+        this.state = {
+            count: 0,
+            name: 'some unchanging thing'
+        };
     }
 
     handleAdd() {
-        console.log("add clicked");
+
+        this.setState((prevState) => {
+            
+            return {
+               count: prevState.count + 1
+            };
+
+        });
+
+        //don't do this, won't render component
+        // this.state.count++;
+        // console.log(this.state);
     }
 
     handleMinus() {
-        console.log('minus clicked');
+
+        if(this.state.count <= 0){
+            return this.state.count;
+        }
+        this.setState((prevState) => {
+            return {
+                count : prevState.count - 1
+            };
+        });
     }
+    
     handleReset() {
-        console.log('reset clicked');
+
+        this.setState(() => {
+            return {
+                count : 0
+            }
+        });
+        
+
+
+        //older syntax
+        this.setState((prevState) => {
+            return {
+                count : prevState.count + 1
+            }
+        });
+
+        //this shows problems with async setState -> gives undesired output.
+        // this.setState({
+        //     count : 0
+        // });
+        // this.setState({
+        //     count: this.state.count + 1
+        // });
     }
 
     render() {
@@ -24,7 +70,8 @@ class Counter extends React.Component {
         return (
 
             <div>
-            <h1>Count: </h1>
+            {this.state.name}
+            <h1>Count: {this.state.count}</h1>
             <button onClick={this.handleAdd}>+ 1</button>
             <button onClick={this.handleMinus}>- 1</button>
             <button onClick={this.handleReset}>Reset</button>

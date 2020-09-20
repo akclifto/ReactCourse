@@ -19,23 +19,65 @@ var Counter = function (_React$Component) {
         _this.handleAdd = _this.handleAdd.bind(_this);
         _this.handleMinus = _this.handleMinus.bind(_this);
         _this.handleReset = _this.handleReset.bind(_this);
+        _this.state = {
+            count: 0,
+            name: 'some unchanging thing'
+        };
         return _this;
     }
 
     _createClass(Counter, [{
         key: 'handleAdd',
         value: function handleAdd() {
-            console.log("add clicked");
+
+            this.setState(function (prevState) {
+
+                return {
+                    count: prevState.count + 1
+                };
+            });
+
+            //don't do this, won't render component
+            // this.state.count++;
+            // console.log(this.state);
         }
     }, {
         key: 'handleMinus',
         value: function handleMinus() {
-            console.log('minus clicked');
+
+            if (this.state.count <= 0) {
+                return this.state.count;
+            }
+            this.setState(function (prevState) {
+                return {
+                    count: prevState.count - 1
+                };
+            });
         }
     }, {
         key: 'handleReset',
         value: function handleReset() {
-            console.log('reset clicked');
+
+            this.setState(function () {
+                return {
+                    count: 0
+                };
+            });
+
+            //older syntax
+            this.setState(function (prevState) {
+                return {
+                    count: prevState.count + 1
+                };
+            });
+
+            //this shows problems with async setState -> gives undesired output.
+            // this.setState({
+            //     count : 0
+            // });
+            // this.setState({
+            //     count: this.state.count + 1
+            // });
         }
     }, {
         key: 'render',
@@ -44,10 +86,12 @@ var Counter = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
+                this.state.name,
                 React.createElement(
                     'h1',
                     null,
-                    'Count: '
+                    'Count: ',
+                    this.state.count
                 ),
                 React.createElement(
                     'button',
