@@ -3,15 +3,19 @@
  */
 
  /**
-  * Parent that holds all the components
+  * Parent that holds all the main components
  */
 class IndecisionApp extends React.Component {
     render() {
+        const title = 'Indecision';
+        const subtitle = 'SkyNext has entered the chat'
+        const options = ['thing one','thing two','thing four'];
+
         return (
             <div>
-                <Header />
+                <Header title={title} subtitle={subtitle}/>
                 <Action />
-                <Options />
+                <Options options={options}/>
                 <AddOption />
             </div>
         );
@@ -19,13 +23,15 @@ class IndecisionApp extends React.Component {
 }
 
 class Header extends React.Component {
+
     //with react components, render always be called.
     render() {
+
         return (
 
             <div>
-                <h1>Indecision App</h1>
-                <h2>SkyNext has entered the chat</h2>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
             </div>
 
         );
@@ -46,10 +52,14 @@ class Action extends React.Component {
 
 class Options extends React.Component {
     render() {
+        // console.log(this.props.options);
         return (
             <div>
-                Option Component here
-                <Option />
+                {this.props.options.length}
+                {
+                    this.props.options.map((opt) => 
+                    <p key={opt}>{opt}</p>)
+                }
             </div>
         );
     }

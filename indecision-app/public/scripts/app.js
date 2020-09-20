@@ -13,7 +13,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 /**
- * Parent that holds all the components
+ * Parent that holds all the main components
 */
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
@@ -27,12 +27,16 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'render',
         value: function render() {
+            var title = 'Indecision';
+            var subtitle = 'SkyNext has entered the chat';
+            var options = ['thing one', 'thing two', 'thing four'];
+
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subtitle: subtitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -53,20 +57,22 @@ var Header = function (_React$Component2) {
     _createClass(Header, [{
         key: 'render',
 
+
         //with react components, render always be called.
         value: function render() {
+
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'h1',
                     null,
-                    'Indecision App'
+                    this.props.title
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'SkyNext has entered the chat'
+                    this.props.subtitle
                 )
             );
         }
@@ -114,11 +120,18 @@ var Options = function (_React$Component4) {
     _createClass(Options, [{
         key: 'render',
         value: function render() {
+            // console.log(this.props.options);
             return React.createElement(
                 'div',
                 null,
-                'Option Component here',
-                React.createElement(Option, null)
+                this.props.options.length,
+                this.props.options.map(function (opt) {
+                    return React.createElement(
+                        'p',
+                        { key: opt },
+                        opt
+                    );
+                })
             );
         }
     }]);
