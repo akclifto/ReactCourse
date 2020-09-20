@@ -3,7 +3,7 @@
 //challenge
 var app = {
     title: 'Indecision App',
-    subtitle: 'new paragraph title',
+    subtitle: 'What do you want to do?',
     options: []
 };
 
@@ -43,6 +43,12 @@ var clearList = function clearList() {
     RenderApp();
 };
 
+var makeDecision = function makeDecision() {
+    var rand = Math.floor(Math.random() * app.options.length);
+    var selected = app.options[rand];
+    alert(selected);
+};
+
 //JSX - Ja74script XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 var RenderApp = function RenderApp() {
@@ -56,15 +62,20 @@ var RenderApp = function RenderApp() {
             app.title
         ),
         app.subtitle && app.subtitle != '' && React.createElement(
-            'p',
+            'h3',
             null,
             ' ',
-            app.subtitle + '!'
+            app.subtitle
         ),
         React.createElement(
             'p',
             null,
             app.options && app.options.length > 0 ? 'Here are your options:' : 'No options available'
+        ),
+        React.createElement(
+            'button',
+            { disabled: app.options.length == 0, onClick: makeDecision },
+            'What Should I Do'
         ),
         React.createElement(
             'button',
@@ -74,7 +85,9 @@ var RenderApp = function RenderApp() {
         React.createElement(
             'ol',
             null,
-            getOptions(app.options)
+            ' ',
+            getOptions(app.options),
+            ' '
         ),
         React.createElement(
             'form',

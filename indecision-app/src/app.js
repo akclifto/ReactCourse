@@ -3,7 +3,7 @@
 //challenge
 const app = {
     title: 'Indecision App',
-    subtitle: 'new paragraph title',
+    subtitle: 'What do you want to do?',
     options: []
 };
 
@@ -37,6 +37,14 @@ const clearList = () => {
     RenderApp();
 };
 
+const makeDecision = () => {
+    const rand = Math.floor(Math.random() * app.options.length);
+    const selected = app.options[rand];
+    alert(selected);
+}
+
+
+
 //JSX - Ja74script XML
 //be sure to wrap expression in div if want adjacent elements, there can be only 1 root element
 const RenderApp = () => {
@@ -45,12 +53,11 @@ const RenderApp = () => {
         <div>
             <h1>{app.title}</h1>
     
-            {(app.subtitle && app.subtitle != '') && <p> {app.subtitle + '!'}</p>}
+            {(app.subtitle && app.subtitle != '') && <h3> {app.subtitle}</h3>}
             <p>{app.options && app.options.length > 0 ? 'Here are your options:' : 'No options available'}</p>
+            <button disabled={app.options.length == 0} onClick={makeDecision}>What Should I Do</button>
             <button onClick={clearList}>Remove All Items</button>
-            <ol>
-                {getOptions(app.options)}
-            </ol>
+            <ol> {getOptions(app.options)} </ol>
     
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option" />
