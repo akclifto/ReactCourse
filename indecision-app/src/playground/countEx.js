@@ -46,15 +46,13 @@ class Counter extends React.Component {
                 count : 0
             }
         });
-        
 
-
-        //older syntax
-        this.setState((prevState) => {
-            return {
-                count : prevState.count + 1
-            }
-        });
+        //testing asyng with the preferred methods, gives expected output.
+        // this.setState((prevState) => {
+        //     return {
+        //         count : prevState.count + 1
+        //     }
+        // });
 
         //this shows problems with async setState -> gives undesired output.
         // this.setState({

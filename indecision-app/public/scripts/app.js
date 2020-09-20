@@ -64,12 +64,12 @@ var Counter = function (_React$Component) {
                 };
             });
 
-            //older syntax
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count + 1
-                };
-            });
+            //testing asyng with the preferred methods, gives expected output.
+            // this.setState((prevState) => {
+            //     return {
+            //         count : prevState.count + 1
+            //     }
+            // });
 
             //this shows problems with async setState -> gives undesired output.
             // this.setState({
