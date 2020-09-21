@@ -6,16 +6,42 @@
   * Parent that holds all the main components
  */
 class IndecisionApp extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleDeleteOption = this.handleDeleteOption.bind(this);
+        this.state = {
+            options : ['thing one','thing two','thing four']
+        };
+    }
+
+    //props only go from parent to child, no upstream.  must use functions
+    //to handle any manip in child to parent.
+
+    //reset options array.
+    handleDeleteOption() {
+
+        this.setState(() => {
+            return {
+                options: []
+            };
+        });
+    }
+
+
+
     render() {
         const title = 'Indecision';
         const subtitle = 'SkyNext has entered the chat'
-        const options = ['thing one','thing two','thing four'];
 
         return (
             <div>
                 <Header title={title} subtitle={subtitle}/>
-                <Action />
-                <Options options={options}/>
+                <Action hasOptions={this.state.options.length > 0}/>
+                <Options 
+                    options={this.state.options}
+                    handleDeleteOption={this.handleDeleteOption}
+                />
                 <AddOption />
             </div>
         );
@@ -48,7 +74,12 @@ class Action extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.handlePick}>What would you like to do?</button>
+                <button 
+                onClick={this.handlePick}
+                disabled={!this.props.hasOptions}
+                >
+                What would you like to do?
+                </button>
             </div>
 
         );
@@ -56,15 +87,6 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.handleRemoveAll = this.handleRemoveAll.bind(this);
-    }
-
-    handleRemoveAll() {
-        console.log(this.props.options);
-    }
 
     render() {
         // console.log(this.props.options);
@@ -75,7 +97,7 @@ class Options extends React.Component {
                 <Option key={opt} optText={opt} /> 
                 )
             }
-            <button onClick={this.handleRemoveAll}>Remove All</button>
+            <button onClick={this.props.handleDeleteOption}>Remove All</button>
             </div>
         );
     }
