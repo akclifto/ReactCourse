@@ -24,6 +24,7 @@ var IndecisionApp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
         _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
+        _this.makeDecision = _this.makeDecision.bind(_this);
         _this.state = {
             options: ['thing one', 'thing two', 'thing four']
         };
@@ -47,6 +48,17 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
+        key: 'makeDecision',
+        value: function makeDecision() {
+
+            var rand = Math.floor(Math.random() * this.state.options.length);
+            var selected = this.state.options[rand];
+
+            console.log("decision clicked");
+
+            return alert(selected);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var title = 'Indecision';
@@ -56,7 +68,10 @@ var IndecisionApp = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(Header, { title: title, subtitle: subtitle }),
-                React.createElement(Action, { hasOptions: this.state.options.length > 0 }),
+                React.createElement(Action, {
+                    hasOptions: this.state.options.length > 0,
+                    makeDecision: this.makeDecision
+                }),
                 React.createElement(Options, {
                     options: this.state.options,
                     handleDeleteOption: this.handleDeleteOption
@@ -115,11 +130,6 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
-        key: 'handlePick',
-        value: function handlePick() {
-            console.log('handle pick clicked');
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -128,10 +138,10 @@ var Action = function (_React$Component3) {
                 React.createElement(
                     'button',
                     {
-                        onClick: this.handlePick,
+                        onClick: this.props.makeDecision,
                         disabled: !this.props.hasOptions
                     },
-                    'What would you like to do?'
+                    'I will choose your fate'
                 )
             );
         }
