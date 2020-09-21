@@ -25,8 +25,9 @@ var IndecisionApp = function (_React$Component) {
 
         _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
         _this.makeDecision = _this.makeDecision.bind(_this);
+        _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.state = {
-            options: ['thing one', 'thing two', 'thing four']
+            options: []
         };
         return _this;
     }
@@ -54,9 +55,25 @@ var IndecisionApp = function (_React$Component) {
             var rand = Math.floor(Math.random() * this.state.options.length);
             var selected = this.state.options[rand];
 
-            console.log("decision clicked");
-
             return alert(selected);
+        }
+    }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+
+            if (!option) {
+                return 'Enter a valid value to add item.';
+                //this checks to see if option is duplicate in array
+            } else if (this.state.options.indexOf(option) > -1) {
+                return 'Item already exists in options';
+            }
+
+            this.setState(function (prevState) {
+                //concat prev state with new option to produce new array.
+                return {
+                    options: prevState.options.concat(option)
+                };
+            });
         }
     }, {
         key: 'render',
@@ -72,11 +89,13 @@ var IndecisionApp = function (_React$Component) {
                     hasOptions: this.state.options.length > 0,
                     makeDecision: this.makeDecision
                 }),
+                React.createElement(AddOption, {
+                    handleAddOption: this.handleAddOption
+                }),
                 React.createElement(Options, {
                     options: this.state.options,
                     handleDeleteOption: this.handleDeleteOption
-                }),
-                React.createElement(AddOption, null)
+                })
             );
         }
     }]);
@@ -208,20 +227,29 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
 
-    function AddOption() {
+    function AddOption(props) {
         _classCallCheck(this, AddOption);
 
-        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+        _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+        _this6.state = {
+            error: undefined
+        };
+        return _this6;
     }
 
     _createClass(AddOption, [{
         key: 'handleAddOption',
         value: function handleAddOption(e) {
             e.preventDefault();
+
             var newOption = e.target.elements.option.value.trim();
-            if (newOption) {
-                alert('New Option: ' + newOption);
-            }
+            var error = this.props.handleAddOption(newOption);
+
+            this.setState(function () {
+                return { error: error };
+            });
         }
     }, {
         key: 'render',
@@ -238,6 +266,11 @@ var AddOption = function (_React$Component6) {
                         null,
                         'Add Option'
                     )
+                ),
+                this.state.error && React.createElement(
+                    'p',
+                    null,
+                    this.state.error
                 )
             );
         }
