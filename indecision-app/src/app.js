@@ -21,11 +21,29 @@ class IndecisionApp extends React.Component {
     //lifescycle components:  used to persist data or something over multiple pages (like a db)
     // does not work for stateless components, must be used with class components.
     componentDidMount() {
-        console.log("Fetching Data");
+
+        try {
+            const json = localStorage.getItem('options');
+            const jsonOptions = JSON.parse(json);
+    
+            if(jsonOptions){
+                this.setState(() => ( {options : jsonOptions} ));
+            }
+
+        } catch (e) {
+            console.log("Caught invalid JSON data. No change to functionality");
+            // Do nothing.
+        }
+
     }
     componentDidUpdate(prevProps, prevState) {
-
-        console.log("Saving Data");
+        //make sure the options state is change, then save
+        if (prevState.options.length !== this.state.options.length) {
+            //for now, store in local data, will convert to db later
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+            console.log("Saving Data");
+        } 
     }
     componentWillUnmount() {
         console.log("will unmount.");
@@ -201,6 +219,11 @@ class AddOption extends React.Component {
         // this.setState(() => {
         //     return { error };
         // });
+
+        //clear input if there wasn't an error, there is not clear() function 
+        if(!error) {
+            e.target.elements.option.value = '';
+        }
 
 
     }

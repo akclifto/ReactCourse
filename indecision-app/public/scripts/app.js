@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -38,18 +38,36 @@ var IndecisionApp = function (_React$Component) {
 
 
     _createClass(IndecisionApp, [{
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log("Fetching Data");
-        }
-    }, {
-        key: "componentDidUpdate",
-        value: function componentDidUpdate(prevProps, prevState) {
 
-            console.log("Saving Data");
+            try {
+                var json = localStorage.getItem('options');
+                var jsonOptions = JSON.parse(json);
+
+                if (jsonOptions) {
+                    this.setState(function () {
+                        return { options: jsonOptions };
+                    });
+                }
+            } catch (e) {
+                console.log("Caught invalid JSON data. No change to functionality");
+                // Do nothing.
+            }
         }
     }, {
-        key: "componentWillUnmount",
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            //make sure the options state is change, then save
+            if (prevState.options.length !== this.state.options.length) {
+                //for now, store in local data, will convert to db later
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+                console.log("Saving Data");
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
         value: function componentWillUnmount() {
             console.log("will unmount.");
         }
@@ -60,7 +78,7 @@ var IndecisionApp = function (_React$Component) {
         //reset options array.
 
     }, {
-        key: "handleDeleteOption",
+        key: 'handleDeleteOption',
         value: function handleDeleteOption() {
 
             this.setState(function () {
@@ -68,7 +86,7 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
-        key: "makeDecision",
+        key: 'makeDecision',
         value: function makeDecision() {
 
             var rand = Math.floor(Math.random() * this.state.options.length);
@@ -77,7 +95,7 @@ var IndecisionApp = function (_React$Component) {
             return alert(selected);
         }
     }, {
-        key: "handleRemoveSingle",
+        key: 'handleRemoveSingle',
         value: function handleRemoveSingle(optionToRemove) {
 
             this.setState(function (prevState) {
@@ -89,7 +107,7 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
-        key: "handleAddOption",
+        key: 'handleAddOption',
         value: function handleAddOption(option) {
 
             if (!option) {
@@ -107,12 +125,12 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var subtitle = 'SkyNet has entered the chat';
 
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(Header, { subtitle: subtitle }),
                 React.createElement(Action, {
@@ -142,15 +160,15 @@ IndecisionApp.defaultProps = {
 var Header = function Header(props) {
 
     return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-            "h1",
+            'h1',
             null,
             props.title
         ),
         props.subtitle && React.createElement(
-            "h2",
+            'h2',
             null,
             props.subtitle
         )
@@ -164,22 +182,22 @@ Header.defaultProps = {
 var Action = function Action(props) {
 
     return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-            "button",
+            'button',
             {
                 onClick: props.makeDecision,
                 disabled: !props.hasOptions
             },
-            "I will choose your fate"
+            'I will choose your fate'
         )
     );
 };
 
 var Options = function Options(props) {
     return React.createElement(
-        "div",
+        'div',
         null,
         props.options.map(function (opt) {
             return React.createElement(Option, {
@@ -189,9 +207,9 @@ var Options = function Options(props) {
             });
         }),
         React.createElement(
-            "button",
+            'button',
             { onClick: props.handleDeleteOption },
-            "Remove All"
+            'Remove All'
         )
     );
 };
@@ -199,18 +217,18 @@ var Options = function Options(props) {
 var Option = function Option(props) {
 
     return React.createElement(
-        "div",
+        'div',
         null,
-        "Option: ",
+        'Option: ',
         props.optText,
         React.createElement(
-            "button",
+            'button',
             {
                 onClick: function onClick(e) {
                     props.handleRemoveSingle(props.optText);
                 }
             },
-            "Remove"
+            'Remove'
         )
     );
 };
@@ -231,7 +249,7 @@ var AddOption = function (_React$Component2) {
     }
 
     _createClass(AddOption, [{
-        key: "handleAddOption",
+        key: 'handleAddOption',
         value: function handleAddOption(e) {
             e.preventDefault();
 
@@ -247,25 +265,29 @@ var AddOption = function (_React$Component2) {
             //     return { error };
             // });
 
+            //clear input if there wasn't an error, there is not clear() function 
+            if (!error) {
+                e.target.elements.option.value = '';
+            }
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "form",
+                    'form',
                     { onSubmit: this.handleAddOption },
-                    React.createElement("input", { type: "text", name: "option" }),
+                    React.createElement('input', { type: 'text', name: 'option' }),
                     React.createElement(
-                        "button",
+                        'button',
                         null,
-                        "Add Option"
+                        'Add Option'
                     )
                 ),
                 this.state.error && React.createElement(
-                    "p",
+                    'p',
                     null,
                     this.state.error
                 )
