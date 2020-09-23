@@ -18,6 +18,21 @@ class IndecisionApp extends React.Component {
         };
     }
 
+    //lifescycle components:  used to persist data or something over multiple pages (like a db)
+    // does not work for stateless components, must be used with class components.
+    componentDidMount() {
+        console.log("Fetching Data");
+    }
+    componentDidUpdate(prevProps, prevState) {
+
+        console.log("Saving Data");
+    }
+    componentWillUnmount() {
+        console.log("will unmount.");
+    }
+
+    
+
     //props only go from parent to child, no upstream.  must use functions
     //to handle any manip in child to parent.
 
@@ -147,7 +162,7 @@ const Options = (props) => {
 const Option = (props) => {
 
     return (
-        
+
         <div>
             Option: {props.optText}
             <button 
