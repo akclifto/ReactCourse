@@ -26,6 +26,7 @@ var IndecisionApp = function (_React$Component) {
         _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
         _this.makeDecision = _this.makeDecision.bind(_this);
         _this.handleAddOption = _this.handleAddOption.bind(_this);
+        _this.handleRemoveSingle = _this.handleRemoveSingle.bind(_this);
         _this.state = {
             options: props.options
         };
@@ -54,6 +55,18 @@ var IndecisionApp = function (_React$Component) {
             var selected = this.state.options[rand];
 
             return alert(selected);
+        }
+    }, {
+        key: 'handleRemoveSingle',
+        value: function handleRemoveSingle(optionToRemove) {
+
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.filter(function (option) {
+                        return optionToRemove !== option;
+                    })
+                };
+            });
         }
     }, {
         key: 'handleAddOption',
@@ -91,7 +104,8 @@ var IndecisionApp = function (_React$Component) {
                 }),
                 React.createElement(Options, {
                     options: this.state.options,
-                    handleDeleteOption: this.handleDeleteOption
+                    handleDeleteOption: this.handleDeleteOption,
+                    handleRemoveSingle: this.handleRemoveSingle
                 })
             );
         }
@@ -103,24 +117,6 @@ var IndecisionApp = function (_React$Component) {
 IndecisionApp.defaultProps = {
     options: []
 };
-
-// class Header extends React.Component {
-
-//     //with react components, render always be called.
-//     render() {
-
-//         return (
-
-//             <div>
-//                 <h1>{this.props.title}</h1>
-//                 <h2>{this.props.subtitle}</h2>
-//             </div>
-
-//         );
-//     }
-
-// }
-
 
 //challenge = convert class to stateless components for the simple classes.
 var Header = function Header(props) {
@@ -161,46 +157,16 @@ var Action = function Action(props) {
     );
 };
 
-// class Action extends React.Component {
-
-//     render() {
-//         return (
-//             <div>
-//                 <button 
-//                 onClick={this.props.makeDecision}
-//                 disabled={!this.props.hasOptions}
-//                 >
-//                 I will choose your fate
-//                 </button>
-//             </div>
-
-//         );
-//     }
-// }
-
-// class Options extends React.Component {
-
-//     render() {
-//         // console.log(this.props.options);
-//         return (
-//             <div>                
-//             {
-//                 this.props.options.map((opt) => 
-//                 <Option key={opt} optText={opt} /> 
-//                 )
-//             }
-//             <button onClick={this.props.handleDeleteOption}>Remove All</button>
-//             </div>
-//         );
-//     }
-// }
-
 var Options = function Options(props) {
     return React.createElement(
         'div',
         null,
         props.options.map(function (opt) {
-            return React.createElement(Option, { key: opt, optText: opt });
+            return React.createElement(Option, {
+                key: opt,
+                optText: opt,
+                handleRemoveSingle: props.handleRemoveSingle
+            });
         }),
         React.createElement(
             'button',
@@ -211,25 +177,23 @@ var Options = function Options(props) {
 };
 
 var Option = function Option(props) {
+
     return React.createElement(
         'div',
         null,
         'Option: ',
-        props.optText
+        props.optText,
+        React.createElement(
+            'button',
+            {
+                onClick: function onClick(e) {
+                    props.handleRemoveSingle(props.optText);
+                }
+            },
+            'Remove'
+        )
     );
 };
-
-// class Option extends React.Component {
-//     render() {
-//         return (
-
-//             <div>
-//                 Option: {this.props.optText}
-//             </div>
-
-//         );
-//     }
-// }
 
 var AddOption = function (_React$Component2) {
     _inherits(AddOption, _React$Component2);
@@ -291,19 +255,5 @@ var AddOption = function (_React$Component2) {
 
     return AddOption;
 }(React.Component);
-
-//this is a stateless functional component.  Should be used for simple components
-//that don't have or need "state"
-// const User = (props) => {
-
-//     return  (
-//         <div>
-//             <p>Name: {props.name}</p>
-//             <p>Age: {props.Age}</p>
-//         </div>
-//     );
-
-// };
-
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));

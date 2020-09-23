@@ -2,8 +2,6 @@
  * Component based JS app with React for Indecision-App 
  */
 
-
-
  /**
   * Parent that holds all the main components
  */
@@ -14,6 +12,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOption = this.handleDeleteOption.bind(this);
         this.makeDecision = this.makeDecision.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
+        this.handleRemoveSingle = this.handleRemoveSingle.bind(this);
         this.state = {
             options : props.options
         };
@@ -34,6 +33,15 @@ class IndecisionApp extends React.Component {
         const selected = this.state.options[rand];
        
         return alert(selected);
+    }
+
+    handleRemoveSingle(optionToRemove) {
+
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option;
+            })
+        }) );
     }
 
 
@@ -69,6 +77,7 @@ class IndecisionApp extends React.Component {
                 <Options 
                     options={this.state.options}
                     handleDeleteOption={this.handleDeleteOption}
+                    handleRemoveSingle={this.handleRemoveSingle}
                 />
             </div>
         );
@@ -79,23 +88,6 @@ class IndecisionApp extends React.Component {
 IndecisionApp.defaultProps = {
     options: []
 };
-
-// class Header extends React.Component {
-
-//     //with react components, render always be called.
-//     render() {
-
-//         return (
-
-//             <div>
-//                 <h1>{this.props.title}</h1>
-//                 <h2>{this.props.subtitle}</h2>
-//             </div>
-
-//         );
-//     }
-
-// }
 
 
 //challenge = convert class to stateless components for the simple classes.
@@ -132,46 +124,17 @@ const Action = (props) => {
 
 };
 
-// class Action extends React.Component {
-
-//     render() {
-//         return (
-//             <div>
-//                 <button 
-//                 onClick={this.props.makeDecision}
-//                 disabled={!this.props.hasOptions}
-//                 >
-//                 I will choose your fate
-//                 </button>
-//             </div>
-
-//         );
-//     }
-// }
-
-// class Options extends React.Component {
-
-//     render() {
-//         // console.log(this.props.options);
-//         return (
-//             <div>                
-//             {
-//                 this.props.options.map((opt) => 
-//                 <Option key={opt} optText={opt} /> 
-//                 )
-//             }
-//             <button onClick={this.props.handleDeleteOption}>Remove All</button>
-//             </div>
-//         );
-//     }
-// }
 
 const Options = (props) => {
     return (
         <div>                
         {
             props.options.map((opt) => 
-            <Option key={opt} optText={opt} /> 
+                <Option 
+                    key={opt} 
+                    optText={opt} 
+                    handleRemoveSingle={props.handleRemoveSingle}
+                /> 
             )
         }
         <button onClick={props.handleDeleteOption}>Remove All</button>
@@ -182,27 +145,24 @@ const Options = (props) => {
 };
 
 const Option = (props) => {
-    return (
 
+    return (
+        
         <div>
             Option: {props.optText}
+            <button 
+                onClick={(e) => {
+                    props.handleRemoveSingle(props.optText)
+                }}
+            >
+                Remove
+            </button>
         </div>
 
     );
 
 }
 
-// class Option extends React.Component {
-//     render() {
-//         return (
-
-//             <div>
-//                 Option: {this.props.optText}
-//             </div>
-
-//         );
-//     }
-// }
 
 class AddOption extends React.Component {
 
@@ -222,7 +182,7 @@ class AddOption extends React.Component {
 
         //challenge change this set state to an implicit call
         this.setState(() => ( {error} ));
-        
+
         // this.setState(() => {
         //     return { error };
         // });
@@ -242,19 +202,5 @@ class AddOption extends React.Component {
         );
     }
 }
-
-//this is a stateless functional component.  Should be used for simple components
-//that don't have or need "state"
-// const User = (props) => {
-
-//     return  (
-//         <div>
-//             <p>Name: {props.name}</p>
-//             <p>Age: {props.Age}</p>
-//         </div>
-//     );
-
-// };
-
 
 ReactDOM.render(<IndecisionApp />,document.getElementById('app'));
