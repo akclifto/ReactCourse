@@ -14,7 +14,7 @@ class IndecisionApp extends React.Component {
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleRemoveSingle = this.handleRemoveSingle.bind(this);
         this.state = {
-            options : props.options
+            options : []
         };
     }
 
@@ -117,10 +117,10 @@ class IndecisionApp extends React.Component {
     }
 }
 
-
-IndecisionApp.defaultProps = {
-    options: []
-};
+//no longer needed since we are saving data to storage 
+// IndecisionApp.defaultProps = {
+//     options: []
+// };
 
 
 //challenge = convert class to stateless components for the simple classes.
@@ -160,7 +160,8 @@ const Action = (props) => {
 
 const Options = (props) => {
     return (
-        <div>                
+        <div>      
+        {props.options.length === 0 && <p>Please add an option to get started.</p>}
         {
             props.options.map((opt) => 
                 <Option 

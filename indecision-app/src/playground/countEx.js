@@ -7,10 +7,37 @@ class Counter extends React.Component {
         this.handleMinus = this.handleMinus.bind(this);
         this.handleReset = this.handleReset.bind(this);
         this.state = {
-            count: props.count,
+            count: 0,
             name: 'some unchanging thing'
         };
     }
+
+    //on load, retrieve stored data
+    componentDidMount() {
+
+        try{
+            const json = localStorage.getItem('count');
+            const count = JSON.parse(parseInt(json, 10));
+
+            if(count !== this.state.count) {
+                this.setState(() => ( {count} ));
+            }
+        } catch (e) {
+            console.log("Caught invalid JSON data.");
+            // do nothing
+        }
+    }
+    //on state change, save stored data
+    componentDidUpdate(prevProps, prevState) {
+
+        if(prevState.count !== this.state.count) {
+            const json = JSON.stringify(this.state.count);
+            localStorage.setItem('count', json);
+            console.log("saving data");
+        }
+
+    }
+    
 
     handleAdd() {
 
@@ -79,9 +106,9 @@ class Counter extends React.Component {
     }
 }
 
-Counter.defaultProps = {
-    count: 0
-};
+// Counter.defaultProps = {
+//     count: 0
+// };
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
 
