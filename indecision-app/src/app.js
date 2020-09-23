@@ -15,7 +15,7 @@ class IndecisionApp extends React.Component {
         this.makeDecision = this.makeDecision.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
         this.state = {
-            options : []
+            options : props.options
         };
     }
 
@@ -25,11 +25,7 @@ class IndecisionApp extends React.Component {
     //reset options array.
     handleDeleteOption() {
 
-        this.setState(() => {
-            return {
-                options: []
-            };
-        });
+        this.setState(() => ({ options: [] }));
     }
 
     makeDecision() {
@@ -50,12 +46,11 @@ class IndecisionApp extends React.Component {
             return 'Item already exists in options';
         }
 
-        this.setState((prevState) =>{
+        this.setState((prevState) => ( 
             //concat prev state with new option to produce new array.
-            return {
-                options : prevState.options.concat(option)
-            };
-        });
+            {options : prevState.options.concat(option)} 
+        )); 
+
     }
 
     render() {
@@ -79,6 +74,11 @@ class IndecisionApp extends React.Component {
         );
     }
 }
+
+
+IndecisionApp.defaultProps = {
+    options: []
+};
 
 // class Header extends React.Component {
 
@@ -220,9 +220,14 @@ class AddOption extends React.Component {
         const newOption = e.target.elements.option.value.trim();
         const error = this.props.handleAddOption(newOption);
 
-        this.setState(() => {
-            return { error };
-        });
+        //challenge change this set state to an implicit call
+        this.setState(() => ( {error} ));
+        
+        // this.setState(() => {
+        //     return { error };
+        // });
+
+
     }
 
     render() {

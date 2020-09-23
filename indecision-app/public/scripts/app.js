@@ -27,7 +27,7 @@ var IndecisionApp = function (_React$Component) {
         _this.makeDecision = _this.makeDecision.bind(_this);
         _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.state = {
-            options: []
+            options: props.options
         };
         return _this;
     }
@@ -43,9 +43,7 @@ var IndecisionApp = function (_React$Component) {
         value: function handleDeleteOption() {
 
             this.setState(function () {
-                return {
-                    options: []
-                };
+                return { options: [] };
             });
         }
     }, {
@@ -69,10 +67,10 @@ var IndecisionApp = function (_React$Component) {
             }
 
             this.setState(function (prevState) {
-                //concat prev state with new option to produce new array.
-                return {
-                    options: prevState.options.concat(option)
-                };
+                return (
+                    //concat prev state with new option to produce new array.
+                    { options: prevState.options.concat(option) }
+                );
             });
         }
     }, {
@@ -102,6 +100,10 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+    options: []
+};
+
 // class Header extends React.Component {
 
 //     //with react components, render always be called.
@@ -121,8 +123,6 @@ var IndecisionApp = function (_React$Component) {
 
 
 //challenge = convert class to stateless components for the simple classes.
-
-
 var Header = function Header(props) {
 
     return React.createElement(
@@ -254,9 +254,15 @@ var AddOption = function (_React$Component2) {
             var newOption = e.target.elements.option.value.trim();
             var error = this.props.handleAddOption(newOption);
 
+            //challenge change this set state to an implicit call
             this.setState(function () {
                 return { error: error };
             });
+
+            // this.setState(() => {
+            //     return { error };
+            // });
+
         }
     }, {
         key: 'render',
