@@ -12,6 +12,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * Component based JS app with React for Indecision-App 
  */
 
+// get ready for webpack usage.
+
+
 /**
  * Parent that holds all the main components
 */

@@ -2,6 +2,10 @@
  * Component based JS app with React for Indecision-App 
  */
 
+
+ // get ready for webpack usage.
+
+
  /**
   * Parent that holds all the main components
  */
@@ -127,7 +131,7 @@ class IndecisionApp extends React.Component {
 const Header = (props) => {
 
     return(
-        <div>
+        <div> 
             <h1>{props.title}</h1>
             {props.subtitle && <h2>{props.subtitle}</h2>}
         </div>
