@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n/* harmony import */ var _person_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\n\r\n\r\n\r\n\r\nconsole.log(\"app.js is running!\");\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"square\"])(6));\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"add\"])(9, 12));\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"isAdult\"])(19));\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"isAdult\"])(15));\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"canDrink\"])(20));\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"canDrink\"])(22));\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n\r\n//how to import specific things from another file. \r\n\r\n\r\n//how to import everything from another file. \r\nconst person = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\r\n\r\n\r\nconsole.log(\"app.js is running!\");\r\n\r\n//from utils.js, imported specific things.\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"square\"])(6));\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"add\"])(9, 12));\r\n\r\n//from person.js, imported everything\r\nconsole.log(person.isAdult(19));\r\nconsole.log(person.isAdult(15));\r\nconsole.log(person.canDrink(25));\r\nconsole.log(person.canDrink(22));\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _uti
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n\r\n\r\nconst isAdult = (x) => (x < 18) ? false : true;\r\nconst canDrink = (x) => (x <= 21) ? false : true;\r\n\r\n\r\n\n\n//# sourceURL=webpack:///./src/person.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n\r\n//name function to export\r\nconst isAdult = (x) => (x < 18) ? false : true;\r\n\r\n//default export \r\nconst canDrink = (x) => (x <= 21) ? false : true;\r\n\r\n//named export\r\n\n\n//# sourceURL=webpack:///./src/person.js?");
 
 /***/ }),
 
