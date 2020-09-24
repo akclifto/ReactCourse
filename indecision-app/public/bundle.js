@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n\r\n//how to import specific things from another file. \r\n\r\n\r\n//how to import everything from another file. \r\nconst person = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\r\n\r\n\r\nconsole.log(\"app.js is running!\");\r\n\r\n//from utils.js, imported specific things.\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"square\"])(6));\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"add\"])(9, 12));\r\n\r\n//from person.js, imported everything\r\nconsole.log(person.isAdult(19));\r\nconsole.log(person.isAdult(15));\r\nconsole.log(person.canDrink(25));\r\nconsole.log(person.canDrink(22));\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n/* harmony import */ var _person_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\n\r\n//how to import specific things from another file. \r\n// import anythingIWant, { square, add } from './utils.js';\r\n\r\n\r\n//challenge from person.js using default import from person.js\r\n\r\n\r\n\r\n//how to import everything from another file. \r\nconst person = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\r\n\r\n\r\n\r\nconsole.log(\"app.js is running!\");\r\n\r\n//from utils.js, imported specific things.\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"square\"])(6));\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"add\"])(9, 12));\r\nconsole.log(Object(_utils_js__WEBPACK_IMPORTED_MODULE_0__[\"subtract\"])(15, 4));\r\n\r\n//subtract is the default in utils.js, but when we import it, we can call it anything we want\r\n// console.log(anythingIWant(64));\r\n\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(64));\r\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(65));\r\n\r\n//from person.js, imported everything\r\n// console.log(person.isAdult(19));\r\n// console.log(person.isAdult(15));\r\n// console.log(person.canDrink(25));\r\n// console.log(person.canDrink(22));\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -102,11 +102,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _uti
 /*!***********************!*\
   !*** ./src/person.js ***!
   \***********************/
-/*! exports provided: canDrink, isAdult */
+/*! exports provided: canDrink, default, isAdult */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n\r\n//name function to export\r\nconst isAdult = (x) => (x < 18) ? false : true;\r\n\r\n//default export \r\nconst canDrink = (x) => (x <= 21) ? false : true;\r\n\r\n//named export\r\n\n\n//# sourceURL=webpack:///./src/person.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n\r\n//name function to export\r\nconst isAdult = (x) => (x < 18) ? false : true;\r\n\r\n//default export \r\nconst canDrink = (x) => (x <= 21) ? false : true;\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ((x) => (x >= 65) ? true : false);\r\n\r\n\r\n//named export\r\n\n\n//# sourceURL=webpack:///./src/person.js?");
 
 /***/ }),
 
@@ -114,11 +114,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: square, add */
+/*! exports provided: square, add, subtract, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"square\", function() { return square; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"add\", function() { return add; });\nconsole.log(\"utils.js is running\");\r\n\r\n\r\nconst square = (x) => x*x;\r\nconst add = (x, y) =>  x + y;\r\n\r\n//exports: default - name exports\r\n\r\n\n\n//# sourceURL=webpack:///./src/utils.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"square\", function() { return square; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"add\", function() { return add; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"subtract\", function() { return subtract; });\nconsole.log(\"utils.js is running\");\r\n\r\n\r\nconst square = (x) => x*x;\r\nconst add = (x, y) =>  x + y;\r\nconst subtract = (x, y) => x - y;\r\n\r\n\r\n//exports: default - name exports\r\n// export { add subtract as default }\r\n\r\n\r\n\r\n//alt for exporting something as default\r\n// export default subtract;\r\n\r\n//another alt way to export subtract as a default\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ((x, y) => x - y);\r\n\n\n//# sourceURL=webpack:///./src/utils.js?");
 
 /***/ })
 
