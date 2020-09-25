@@ -3,6 +3,7 @@ import AddOption from './AddOption';
 import Header from './Header';
 import Action from './Action';
 import Options from './Options'
+import OptionModal from './OptionModal';
 
 
 /**
@@ -11,7 +12,8 @@ import Options from './Options'
 export default class IndecisionApp extends React.Component {
 
     state = {
-        options: []
+        options: [],
+        selectedOption: undefined 
     };
 
 
@@ -24,12 +26,20 @@ export default class IndecisionApp extends React.Component {
         this.setState(() => ({ options: [] }));
     };
 
+    //clear the selected option to hide the modal popup
+    clearSelectedOption = () => {
+        this.setState(() => ( { selectedOption : undefined } ));
+    };
+
     makeDecision = () => {
 
         const rand = Math.floor(Math.random() * this.state.options.length);
         const selected = this.state.options[rand];
        
-        return alert(selected);
+        //set the selected option for the modal
+        this.setState(() => ({
+            selectedOption: selected
+        }) );
     };
 
     handleRemoveSingle = (optionToRemove) => {
@@ -110,6 +120,12 @@ export default class IndecisionApp extends React.Component {
                     handleDeleteOption={this.handleDeleteOption}
                     handleRemoveSingle={this.handleRemoveSingle}
                 />
+                <OptionModal 
+                    selectedOption={this.state.selectedOption}
+                    clearSelectedOption = {this.handleDeleteOption}
+                />
+                
+                
             </div>
         );
     }
