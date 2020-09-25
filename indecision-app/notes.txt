@@ -13,3 +13,5 @@ validator
 react react-dom
 babel-core babel-loader
 webpack-dev-server
+
+babel-plugin-transform-class-properties

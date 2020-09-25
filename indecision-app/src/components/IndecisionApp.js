@@ -10,16 +10,54 @@ import Options from './Options'
  */
 export default class IndecisionApp extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
-        this.makeDecision = this.makeDecision.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleRemoveSingle = this.handleRemoveSingle.bind(this);
-        this.state = {
-            options : []
-        };
-    }
+    state = {
+        options: []
+    };
+
+
+    //props only go from parent to child, no upstream.  must use functions
+    //to handle any manip in child to parent.
+
+    //reset options array.
+    handleDeleteOption = () => {
+
+        this.setState(() => ({ options: [] }));
+    };
+
+    makeDecision = () => {
+
+        const rand = Math.floor(Math.random() * this.state.options.length);
+        const selected = this.state.options[rand];
+       
+        return alert(selected);
+    };
+
+    handleRemoveSingle = (optionToRemove) => {
+
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option;
+            })
+        }) );
+    };
+
+
+    handleAddOption = (option) => {
+
+        if(!option) {
+            return 'Enter a valid value to add item.';
+        //this checks to see if option is duplicate in array
+        } else if(this.state.options.indexOf(option) > -1) {
+            return 'Item already exists in options';
+        }
+
+        this.setState((prevState) => ( 
+            //concat prev state with new option to produce new array.
+            {options : prevState.options.concat(option)} 
+        )); 
+
+    };
+
 
     //lifescycle components:  used to persist data or something over multiple pages (like a db)
     // does not work for stateless components, must be used with class components.
@@ -39,6 +77,7 @@ export default class IndecisionApp extends React.Component {
         }
 
     }
+    
     componentDidUpdate(prevProps, prevState) {
         //make sure the options state is change, then save
         if (prevState.options.length !== this.state.options.length) {
@@ -48,51 +87,9 @@ export default class IndecisionApp extends React.Component {
             console.log("Saving Data");
         } 
     }
+
     componentWillUnmount() {
         console.log("will unmount.");
-    }
-
-    //props only go from parent to child, no upstream.  must use functions
-    //to handle any manip in child to parent.
-
-    //reset options array.
-    handleDeleteOption() {
-
-        this.setState(() => ({ options: [] }));
-    }
-
-    makeDecision() {
-
-        const rand = Math.floor(Math.random() * this.state.options.length);
-        const selected = this.state.options[rand];
-       
-        return alert(selected);
-    }
-
-    handleRemoveSingle(optionToRemove) {
-
-        this.setState((prevState) => ({
-            options: prevState.options.filter((option) => {
-                return optionToRemove !== option;
-            })
-        }) );
-    }
-
-
-    handleAddOption(option) {
-
-        if(!option) {
-            return 'Enter a valid value to add item.';
-        //this checks to see if option is duplicate in array
-        } else if(this.state.options.indexOf(option) > -1) {
-            return 'Item already exists in options';
-        }
-
-        this.setState((prevState) => ( 
-            //concat prev state with new option to produce new array.
-            {options : prevState.options.concat(option)} 
-        )); 
-
     }
 
     render() {
