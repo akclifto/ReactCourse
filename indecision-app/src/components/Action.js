@@ -1,19 +1,16 @@
 import React from 'react';
 
-const Action = (props) => {
+const Action = (props) => (
 
-    return (
-        <div>
-        <button 
-        onClick={props.makeDecision}
-        disabled={!props.hasOptions}
+    <div>
+        <button
+            onClick={props.makeDecision}
+            disabled={!props.hasOptions}
         >
-        I will choose your fate
+            I will choose your fate
         </button>
     </div>
 
-    );
-
-};
+);
 
 export default Action;

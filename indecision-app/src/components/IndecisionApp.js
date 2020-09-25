@@ -26,11 +26,22 @@ export default class IndecisionApp extends React.Component {
         this.setState(() => ({ options: [] }));
     };
 
-    //clear the selected option to hide the modal popup
-    clearSelectedOption = () => {
-        this.setState(() => ( { selectedOption : undefined } ));
+    //remove a single option from the list.
+    handleRemoveSingle = (optionToRemove) => {
+
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option;
+            })
+        }) );
     };
 
+    //clear the selected option to hide the modal popup
+    clearSelectedOption = () => {
+        this.setState(() => ( { selectedOption : undefined }));
+    };
+
+    //select an option from the list at random
     makeDecision = () => {
 
         const rand = Math.floor(Math.random() * this.state.options.length);
@@ -42,16 +53,8 @@ export default class IndecisionApp extends React.Component {
         }) );
     };
 
-    handleRemoveSingle = (optionToRemove) => {
 
-        this.setState((prevState) => ({
-            options: prevState.options.filter((option) => {
-                return optionToRemove !== option;
-            })
-        }) );
-    };
-
-
+    //add an option from the list when input by user. 
     handleAddOption = (option) => {
 
         if(!option) {
@@ -88,6 +91,7 @@ export default class IndecisionApp extends React.Component {
 
     }
     
+    //build in function - save date from appl to localStorage
     componentDidUpdate(prevProps, prevState) {
         //make sure the options state is change, then save
         if (prevState.options.length !== this.state.options.length) {
@@ -98,6 +102,7 @@ export default class IndecisionApp extends React.Component {
         } 
     }
 
+    //this fires when you close out the app, you wont see this log on the screen.
     componentWillUnmount() {
         console.log("will unmount.");
     }
@@ -122,10 +127,8 @@ export default class IndecisionApp extends React.Component {
                 />
                 <OptionModal 
                     selectedOption={this.state.selectedOption}
-                    clearSelectedOption = {this.handleDeleteOption}
+                    clearSelectedOption = {this.clearSelectedOption}
                 />
-                
-                
             </div>
         );
     }
