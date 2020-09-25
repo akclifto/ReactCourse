@@ -12,3 +12,4 @@ webpack-cli (this one prompted when trying to use yarn run '' for the first time
 validator
 react react-dom
 babel-core babel-loader
+webpack-dev-server

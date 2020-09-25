@@ -52,8 +52,6 @@ export default class IndecisionApp extends React.Component {
         console.log("will unmount.");
     }
 
-    
-
     //props only go from parent to child, no upstream.  must use functions
     //to handle any manip in child to parent.
 
