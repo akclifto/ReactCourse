@@ -3,3 +3,12 @@ babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
 
 server start:
 live-server public
+
+
+yarn adds:
+
+webpack
+webpack-cli (this one prompted when trying to use yarn run '' for the first time)
+validator
+react react-dom
+babel-core babel-loader
