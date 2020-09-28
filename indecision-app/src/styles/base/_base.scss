@@ -1,11 +1,23 @@
 
 
+// This is used to conver rem font-sizes into a base 10 value.  E.g., 1.6rem == 16px
 html {
     font-size: 62.5%;
 }
 
+// Body attr
 body {
     background-color: $dark-blue;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;
+}
+
+
+// Button attr
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
 }
