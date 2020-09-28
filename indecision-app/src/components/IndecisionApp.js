@@ -108,7 +108,7 @@ export default class IndecisionApp extends React.Component {
     }
 
     render() {
-        const subtitle = 'SkyNet has entered the chat';
+        const subtitle = 'Beepboop Beepboop will control your destiny';
 
         return (
             <div>
