@@ -2,6 +2,7 @@
 // add option main field 
 .add-option {
     display: flex;
+    flex-direction: column;
     padding: $s-size;
     
 }
@@ -13,7 +14,7 @@
     border-bottom: .3rem solid darken($dark-blue, 10%);
     color: $off-white;
     flex-grow: 1;
-    margin-right: $s-size;
+    margin: 0 0 $s-size 0;
     padding: $s-size;
     font-weight: bold;
 }
@@ -25,4 +26,19 @@
     font-style: italic;
     margin-top: $m-size;
     padding: 0 $m-size;
+}
+
+
+//this changes some of the overlay depending on the size of the viewing device
+// below are option for larger viewports, where the rest above is mobile by default.
+@media (min-width: $desktop-breakpoint) {
+
+    .add-option {
+        flex-direction: row;
+    }
+    
+    .add-option__input {
+        margin: 0 $s-size 0 0;
+    }
+
 }
