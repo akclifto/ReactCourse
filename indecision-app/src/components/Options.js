@@ -14,7 +14,12 @@ const Options = (props) => (
                 />
             )
         }
-        <button onClick={props.handleDeleteOption}>Remove All</button>
+        <button 
+            className="button button--link"
+            onClick={props.handleDeleteOption}
+        >
+            Remove All
+        </button>
     </div>
 );
 

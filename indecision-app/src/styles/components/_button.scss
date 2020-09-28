@@ -1,4 +1,4 @@
-
+// large main button
 .big-button {
     background-color: $purple;
     border: none;
@@ -16,7 +16,20 @@
     opacity: .5;
 }
 
-
+// smaller buttons
 .button {
-    
+    background-color: $purple;    
+    border: none;
+    border-bottom: .3rem solid darken($purple, 10%);
+    color: white;
+    font-weight: 500;
+    padding: $s-size
+}
+
+
+.button--link {
+    background-color: transparent;
+    border: none;
+    color: $off-white;
+    padding: 0;
 }
